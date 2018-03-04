@@ -38,9 +38,9 @@ foreach ($listeComments as $comment)
 {
   echo 
 	'<tr>
-  		<td style="text-align:center">', $comment['auteur'], '</td>
-  		<td style="text-align:center">', $comment['contenu'], '</td>
-  		<td style="text-align:center">', $comment['date'], '</td>
+  		<td style="text-align:center">', htmlspecialchars($comment['auteur']), '</td>
+  		<td style="text-align:center">', htmlspecialchars($comment['contenu']), '</td>
+  		<td style="text-align:center">', htmlspecialchars($comment['date']), '</td>
 		<td style="text-align:center"><INPUT onclick="GatherIdsToValidate(',$comment['id'],')" type="checkbox" name="choix1" value="1"></td>
 		<td style="text-align:center"><INPUT onclick="GatherIdsToDelete(',$comment['id'],')" type="checkbox" name="choix1" value="1"></td>
 		
