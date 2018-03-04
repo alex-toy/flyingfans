@@ -14,11 +14,6 @@ class MenuField extends Field
     $value = !empty($this->value) ? htmlspecialchars($this->value) : "";
     
     
-    //echo 'errorMessage : ' . $errorMessage . '<br>';
-	//echo 'label : ' . $label . '<br>';
-    //echo 'name : ' . $name . '<br>';
-    //echo 'value : ' . $value . '<br>';
-    
     $widget = '
     <p>' . $label . ' :</p>' . 
     '<select name="cars">

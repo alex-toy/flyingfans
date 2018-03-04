@@ -42,7 +42,6 @@ class ArticlesController extends BackController
     $this->page->addVar('listeArticles', $listeArticles);
     
     
-    //bandeau lateral :
     $nombreArticles = $manager->count();
     $this->page->addVar('nombreArticles', $nombreArticles);
     $listeAllTitle = $manager->getAllTitle();
@@ -104,7 +103,6 @@ class ArticlesController extends BackController
  
   public function executeShowArticleById(HTTPRequest $request)
   {
-    //echo 'executeShowArticleById <br>';
     
     $article = $this->managers->getManagerOf('articles')->getUnique($request->getData('id'));
  
@@ -119,10 +117,9 @@ class ArticlesController extends BackController
     $this->page->addVar('validatedcomments', $this->managers->getManagerOf('Comments')->getValidatedComments($article->id()));
     
     
-    //bandeau lateral :
     $manager = $this->managers->getManagerOf('Articles');
     $nombreArticles = $manager->count();
-    //echo 'nombreArticles : ' . $nombreArticles . '<br>';
+    
     $this->page->addVar('nombreArticles', $nombreArticles);
     $listeAllTitle = $manager->getAllTitle();
     ob_start();
@@ -131,14 +128,12 @@ class ArticlesController extends BackController
     $this->page->addVar('bandeau_lateral', $bandeau_lateral);
  
 
-    
-    // On ajoute la variable $nombreArticles à la vue.
+
     $nombreArticles = $manager->count();
-    //echo 'nombreArticles : ' . $nombreArticles . '<br>';
+    
     $this->page->addVar('nombreArticles', $nombreArticles);
     
 	$id = $request->getData('id');
-	//echo 'id : ' . $id;
     
   }
  
@@ -239,9 +234,7 @@ class ArticlesController extends BackController
 		$this->page->addVar('arrivals', $list_arrivals);
     }
  
-    
 
-    //bandeau lateral :
     $manager = $this->managers->getManagerOf('Articles');
     $nombreArticles = $manager->count();
     

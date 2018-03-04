@@ -27,19 +27,19 @@ class Route
   {  
     $regex = $this->url;
     $regex = str_replace( '/' , '\/' , $regex);
-    //echo 'test replace : ' . $regex . '<br>';
+    
     $regex = '/^' . $regex . '$/';
     
-    //echo 'url : ' . $url . '<br>';
+   
 
     if (preg_match($regex, $url, $matches))
     {
-      //echo 'matches : ' . $matches[0] . '<br>';
+      
       return $matches;
     }
     else
     {
-      //echo 'dans le false <br>';
+      
       return false;
     }
   }
