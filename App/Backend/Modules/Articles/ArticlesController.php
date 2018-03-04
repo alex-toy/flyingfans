@@ -12,9 +12,10 @@ use \OCFram\FormHandler;
  
 class ArticlesController extends BackController
 {
+  
   public function executeIndex(HTTPRequest $request)
   {
-    //echo 'ArticlesController->executeIndex<br>';
+    
     $this->page->addVar('title', 'Gestion des articles');
  
     $manager = $this->managers->getManagerOf('Articles');
@@ -23,8 +24,6 @@ class ArticlesController extends BackController
     $this->page->addVar('listeArticles', $manager->getAllArticles());
     $this->page->addVar('nombreNews', $manager->count());
   }
-  
-  
   
   
   
@@ -56,7 +55,7 @@ class ArticlesController extends BackController
     $this->app->user()->setFlash('Le commentaire a bien été supprimé !');
  
     $redirection = 'http://localhost/~alexei/FlyWithMeOC2/Web/admin/articles-list-comment-' . $articleId . '.html';
-    //echo $redirection;
+    
 
     $this->app->httpResponse()->redirect($redirection);
     
@@ -71,6 +70,7 @@ class ArticlesController extends BackController
  
     $this->page->addVar('title', 'Ajout d\'un article');
   }
+  
  
  
   public function executeUpdate(HTTPRequest $request)
@@ -78,7 +78,7 @@ class ArticlesController extends BackController
     $this->processForm($request);
     
     $title_article = $this->managers->getManagerOf('articles')->getUnique($request->getData('id'))->titre();
-    //echo 'title_article : ' . $title_article;
+    
     $this->page->addVar('title_article', $title_article );
     
     $this->page->addVar('title', 'Modification de l\'article');
@@ -92,7 +92,7 @@ class ArticlesController extends BackController
     $CommentId = $request->getData('id');
     
     $articleId = $request->getData('id_article');
-    echo $articleId;
+    
     
     $this->page->addVar('title', 'Validation d\'un commentaire');
     
@@ -109,6 +109,7 @@ class ArticlesController extends BackController
     $this->app->httpResponse()->redirect($redirection);
     
   }
+  
  
  
   public function processForm(HTTPRequest $request)
@@ -116,7 +117,6 @@ class ArticlesController extends BackController
     
     if ($request->method() == 'POST')
     {
-      echo 'processForm POST<br>';
       $articles = new Articles([
         'titre' => $request->postData('depart'). '-' . $request->postData('arrivee'),
         'depart' => $request->postData('depart'),
@@ -127,22 +127,17 @@ class ArticlesController extends BackController
  
       if ($request->getExists('id'))
       {
-        //echo 'id : ' . $request->getData('id');
         $articles->setId($request->getData('id'));
       }
     }
     else
     {
-      //echo 'pas POST<br>';
-      // L'identifiant de la news est transmis si on veut la modifier
       if ($request->getExists('id'))
       {
-        //echo '$request->getData(id) : ' . $request->getData('id') . '<br>';
         $articles = $this->managers->getManagerOf('articles')->getUnique($request->getData('id'));
       }
       else
       {
-        //echo 'new Articles';
         $articles = new Articles;
       }
     }
@@ -165,6 +160,7 @@ class ArticlesController extends BackController
   }
   
   
+  
   public function executeListComment(HTTPRequest $request)
   {
     
@@ -183,6 +179,7 @@ class ArticlesController extends BackController
   }
   
   
+  
   public function executeListValidatedComment(HTTPRequest $request)
   {
     $this->page->addVar('title', 'Commentaires validés');
@@ -193,6 +190,8 @@ class ArticlesController extends BackController
     $this->page->addVar('nombreComments', $managerArticles->getCountValidatedCommentById($request->getData('id')));
     $this->page->addVar('title_article', $managerArticles->getTitleById($request->getData('id')));
   }
+  
+  
   
   public function executeListUnvalidatedComment(HTTPRequest $request)
   {
@@ -205,6 +204,7 @@ class ArticlesController extends BackController
     $this->page->addVar('title_article', $managerArticles->getTitleById($request->getData('id')));
     $this->page->addVar('id_article', $request->getData('id'));
   }
+  
   
   
   public function executeDeleteUnvalidatedComment(HTTPRequest $request)
