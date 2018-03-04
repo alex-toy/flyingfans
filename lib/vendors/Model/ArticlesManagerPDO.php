@@ -17,6 +17,8 @@ class ArticlesManagerPDO extends ArticlesManager
     $requete->execute();
   }
  
+ 
+ 
   public function count()
   {
     return $this->dao->query('SELECT COUNT(*) FROM article')->fetchColumn();
@@ -88,7 +90,6 @@ class ArticlesManagerPDO extends ArticlesManager
   public function getAllTitle()
   {
     $sql = 'SELECT id, titre FROM article ORDER BY id DESC';
-    //echo $sql;
 
     $requete = $this->dao->query($sql);
     $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Articles');
@@ -105,10 +106,7 @@ class ArticlesManagerPDO extends ArticlesManager
   
   public function getTitleById($id_article)
   {
-    //echo 'id_article : ' . $id_article . '<br>';
-    
     $sql = 'SELECT titre FROM article WHERE id = :id_article;';
-    //echo $sql;
 
     $requete = $this->dao->prepare($sql);
     $requete->bindValue(':id_article', (int) $id_article, \PDO::PARAM_INT);
@@ -126,17 +124,14 @@ class ArticlesManagerPDO extends ArticlesManager
   
   public function getListCommentById($id_article)
   {
-    //echo 'getListCommentById : ' . $id_article . '<br>';
-    
     $sql = 'SELECT id, auteur, contenu FROM comments WHERE id_article = :id_article;';
-    //echo $sql;
+    
 
     $requete = $this->dao->prepare($sql);
     $requete->bindValue(':id_article', (int) $id_article, \PDO::PARAM_INT);
     $requete->execute();
  
     $list_comment = $requete->fetchAll();
-    //print_r($list_comment);
        
     
     $requete->closeCursor();
@@ -149,17 +144,14 @@ class ArticlesManagerPDO extends ArticlesManager
   
   public function getListValidatedCommentById($id_article)
   {
-    //echo 'getListCommentById : ' . $id_article . '<br>';
     
     $sql = 'SELECT id, auteur, contenu FROM comments WHERE id_article = :id_article AND validated = true;';
-    //echo $sql;
 
     $requete = $this->dao->prepare($sql);
     $requete->bindValue(':id_article', (int) $id_article, \PDO::PARAM_INT);
     $requete->execute();
  
     $list_comment = $requete->fetchAll();
-    //print_r($list_comment);
        
     
     $requete->closeCursor();
@@ -192,8 +184,6 @@ class ArticlesManagerPDO extends ArticlesManager
   
   public function getNumberUnvalidatedComments()
   {
-    //echo 'getNumberUnvalidatedComments : <br>';
-    
     
     // tableau d'id d'article:  =======================================
     $sql = 'SELECT id FROM Article;';
@@ -210,9 +200,9 @@ class ArticlesManagerPDO extends ArticlesManager
     // tableau d'id de commentaires:  =======================================
     $IdCommentArrayArraytemp = [];
     foreach($IdArticleArray as $idArticle){
-    	//echo $idArticle;
+    	
     	$sql = 'SELECT COUNT(*) FROM comments WHERE id_article = :id_article AND validated = false;';
-    	//echo $sql;
+    	
     	$requete = $this->dao->prepare($sql);
     	$requete->bindValue(':id_article', (int) $idArticle, \PDO::PARAM_INT);
     	$requete->execute();
@@ -229,10 +219,9 @@ class ArticlesManagerPDO extends ArticlesManager
   
   public function getCountCommentById($id_article)
   {
-    //echo 'getCountCommentById : ' . $id_article . '<br>';
     
     $sql = 'SELECT COUNT(*) FROM comments WHERE id_article = :id_article;';
-    //echo $sql;
+
 
     $requete = $this->dao->prepare($sql);
     $requete->bindValue(':id_article', (int) $id_article, \PDO::PARAM_INT);
@@ -240,7 +229,7 @@ class ArticlesManagerPDO extends ArticlesManager
  
     $array_nombre_article = $requete->fetchAll();
     $nombre_article = $array_nombre_article[0][0];
-    //echo 'nombre_article : ' . $nombre_article . '<br>';
+    
     
     $requete->closeCursor();
  
@@ -251,10 +240,9 @@ class ArticlesManagerPDO extends ArticlesManager
   
   public function getCountValidatedCommentById($id_article)
   {
-    //echo 'getCountCommentById : ' . $id_article . '<br>';
     
     $sql = 'SELECT COUNT(*) FROM comments WHERE id_article = :id_article AND validated = true;';
-    //echo $sql;
+    
 
     $requete = $this->dao->prepare($sql);
     $requete->bindValue(':id_article', (int) $id_article, \PDO::PARAM_INT);
@@ -262,7 +250,7 @@ class ArticlesManagerPDO extends ArticlesManager
  
     $array_nombre_article = $requete->fetchAll();
     $nombre_article = $array_nombre_article[0][0];
-    //echo 'nombre_article : ' . $nombre_article . '<br>';
+    
     
     $requete->closeCursor();
  
@@ -273,18 +261,15 @@ class ArticlesManagerPDO extends ArticlesManager
   
   public function getCountUnvalidatedCommentById($id_article)
   {
-    //echo 'getCountCommentById : ' . $id_article . '<br>';
     
     $sql = 'SELECT COUNT(*) FROM comments WHERE id_article = :id_article AND validated = false;';
-    //echo $sql;
-
+    
     $requete = $this->dao->prepare($sql);
     $requete->bindValue(':id_article', (int) $id_article, \PDO::PARAM_INT);
     $requete->execute();
  
     $array_nombre_article = $requete->fetchAll();
     $nombre_article = $array_nombre_article[0][0];
-    //echo 'nombre_article : ' . $nombre_article . '<br>';
     
     $requete->closeCursor();
  
@@ -307,9 +292,6 @@ class ArticlesManagerPDO extends ArticlesManager
       $article->setDateAjout(new \DateTime($article->dateAjout()));
       $article->setDateModif(new \DateTime($article->dateModif()));
  
-      //echo 'id : ' . $id . '<br>';
-      //echo 'auteur de l\'article : ' . $article['auteur'] . '<br>';
-      //echo 'date ajout de l\'article : ' . $article['dateAjout']->format('d-m-Y') . '<br>';
       return $article;
     }
  
@@ -334,10 +316,9 @@ class ArticlesManagerPDO extends ArticlesManager
   
   public function getDepartures()
   {
-    //echo 'getDepartures :<br>';
     
     $sql = 'SELECT DISTINCT depart FROM article;';
-    //echo $sql;
+    
 
     $requete = $this->dao->prepare($sql);
     $requete->execute();
@@ -348,7 +329,7 @@ class ArticlesManagerPDO extends ArticlesManager
 	{    
 		$depart[] =  $value['depart'];
 	}
-    //print_r($depart);
+    
     
     $requete->closeCursor();
  
@@ -359,10 +340,8 @@ class ArticlesManagerPDO extends ArticlesManager
   
   public function getArrivals()
   {
-    //echo '<br>getArrivals :<br>';
-    
     $sql = 'SELECT DISTINCT arrivee FROM article;';
-    //echo $sql;
+    
 
     $requete = $this->dao->prepare($sql);
     $requete->execute();
@@ -373,7 +352,7 @@ class ArticlesManagerPDO extends ArticlesManager
 	{    
 		$arrivee[] =  $value['arrivee'];
 	}
-    //print_r($arrivee);
+    
     
     $requete->closeCursor();
  	
@@ -384,10 +363,10 @@ class ArticlesManagerPDO extends ArticlesManager
   
   public function getArticlesByDepartureAndArrival($departure, $arrival)
   {
-    //echo '<br>getArrivals :<br>';
+    
     
     $sql = 'SELECT DISTINCT id FROM article WHERE depart = :d AND arrivee = :a;';
-    //echo $sql;
+    
 
     $requete = $this->dao->prepare($sql);
     $requete->bindValue(':d', $departure);
@@ -395,14 +374,14 @@ class ArticlesManagerPDO extends ArticlesManager
     $requete->execute();
  
     $id_temp = $requete->fetchAll();
-    //print_r($id_temp);
+    
     
     $id_article = [];
     foreach($id_temp as $value)
     {
     	$id_article[] = $value['id'];
     }
-    //print_r($id_article);
+    
     $requete->closeCursor();
  
     return $id_article;
