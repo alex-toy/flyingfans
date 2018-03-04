@@ -47,10 +47,8 @@ class ArticlesController extends BackController
   {
         
     $CommentId = $request->getData('id');
-    //echo $CommentId;
     
     $articleId = $request->getData('id_article');
-    echo $articleId;
     
     
     $this->managers->getManagerOf('Comments')->delete($CommentId);
@@ -90,10 +88,8 @@ class ArticlesController extends BackController
   
   public function executeValidateComment(HTTPRequest $request)
   {
-    //echo 'executeValidateComment<br>';
     
     $CommentId = $request->getData('id');
-    //echo $CommentId;
     
     $articleId = $request->getData('id_article');
     echo $articleId;
@@ -105,12 +101,10 @@ class ArticlesController extends BackController
     
     
     $comment_manager->validateCommentWithId($CommentId);
-    //echo 'fin executeValidateComment<br>';
     
     $this->app->user()->setFlash('Le commentaire a bien été validé !');
  
     $redirection = 'http://localhost/~alexei/FlyWithMeOC2/Web/admin/articles-list-unvalidated-comment-' . $articleId . '.html';
-    //echo $redirection;
 
     $this->app->httpResponse()->redirect($redirection);
     
@@ -173,11 +167,10 @@ class ArticlesController extends BackController
   
   public function executeListComment(HTTPRequest $request)
   {
-    //echo 'executeListComment<br>';
+    
     $this->page->addVar('title', 'Liste des commentaires');
     
     $id_article = $request->getData('id');
-    //echo $id_article;
  
     $manager = $this->managers->getManagerOf('Articles');
 
@@ -186,15 +179,12 @@ class ArticlesController extends BackController
     $this->page->addVar('nombreComments', $manager->getCountCommentById($id_article));
     $this->page->addVar('title_article', $manager->getTitleById($id_article));
     $this->page->addVar('id_article', $id_article);
-    
-    //echo 'fin executeListComment';
 
   }
   
   
   public function executeListValidatedComment(HTTPRequest $request)
   {
-    //echo 'executeListComment<br>';
     $this->page->addVar('title', 'Commentaires validés');
  
     $managerArticles = $this->managers->getManagerOf('Articles');
@@ -206,7 +196,6 @@ class ArticlesController extends BackController
   
   public function executeListUnvalidatedComment(HTTPRequest $request)
   {
-    //echo 'executeListUnvalidatedComment<br>';
     $this->page->addVar('title', 'Commentaires à valider');
  
     $managerArticles = $this->managers->getManagerOf('Articles');
@@ -222,10 +211,9 @@ class ArticlesController extends BackController
   {
         
     $CommentId = $request->getData('id');
-    //echo $CommentId;
+    
     
     $articleId = $request->getData('id_article');
-    //echo $articleId;
     
     
     $this->managers->getManagerOf('Comments')->delete($CommentId);
@@ -233,7 +221,6 @@ class ArticlesController extends BackController
     $this->app->user()->setFlash('Le commentaire a bien été supprimé !');
  
     $redirection = 'http://localhost/~alexei/FlyWithMeOC2/Web/admin/articles-list-unvalidated-comment-' . $articleId . '.html';
-    //echo $redirection;
 
     $this->app->httpResponse()->redirect($redirection);
     
@@ -245,19 +232,14 @@ class ArticlesController extends BackController
   public function executeDeleteUnvalidatedGroupComment(HTTPRequest $request)
   {
     
-    //echo 'executeDeleteUnvalidatedGroupComment';
-    
     $CommentsIdsToBeDeleted = $request->getData('CommentsIdsToBeDeleted');
     $CommentsIdsToBeDeleted = substr($CommentsIdsToBeDeleted, 1, $CommentsIdsToBeDeleted.length - 1);
-	//echo 'CommentsIdsToBeDeleted : ' . $CommentsIdsToBeDeleted . '<br>'; 
-
-
+	
 	$CommentsIdsToBeDeletedArray = explode(",",$CommentsIdsToBeDeleted);
     
     
     
     $id_article = $request->getData('id_article');
-    //echo $id_article;
     
     foreach ($CommentsIdsToBeDeletedArray as $CommentsId) {
     	echo $CommentsId . '<br>';
@@ -266,7 +248,7 @@ class ArticlesController extends BackController
     
     $this->app->user()->setFlash('Les commentaires ont bien été supprimés !');
     $redirection = 'http://localhost/~alexei/FlyWithMeOC2/Web/admin/articles-list-unvalidated-comment-' . $id_article . '.html';
-    //echo $redirection;
+    
     $this->app->httpResponse()->redirect($redirection);
     
   }
@@ -276,20 +258,15 @@ class ArticlesController extends BackController
   
   public function executeValidateUnvalidatedGroupComment(HTTPRequest $request)
   {
-    //echo 'ValidateUnvalidatedGroupComment<br>';
-    
     
     $CommentsIdsToBeValidated = $request->getData('CommentsIdsToBeValidated');
     $CommentsIdsToBeValidated = substr($CommentsIdsToBeValidated, 1, $CommentsIdsToBeValidated.length - 1);
-	//echo 'CommentsIdsToBeValidated : ' . $CommentsIdsToBeValidated . '<br>'; 
-
-
+	
 	$CommentsIdsToBeValidatedArray = explode(",",$CommentsIdsToBeValidated);
     
     
     
     $id_article = $request->getData('id_article');
-    //echo $id_article;
     
     foreach ($CommentsIdsToBeValidatedArray as $CommentsId) {
     	echo $CommentsId . '<br>';
@@ -298,7 +275,7 @@ class ArticlesController extends BackController
     
     $this->app->user()->setFlash('Les commentaires ont bien été validés !');
     $redirection = 'http://localhost/~alexei/FlyWithMeOC2/Web/admin/articles-list-unvalidated-comment-' . $id_article . '.html';
-    //echo $redirection;
+    
     $this->app->httpResponse()->redirect($redirection);
     
   }

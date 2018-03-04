@@ -119,16 +119,11 @@ function GatherIdsToDelete(idComment) {
 
 function ValidateGroup(idArticle) {
 	
-	//alert(idArticle);
-	//alert(CommentsIdsToBeValidated_temp);
-	
 	var CommentsIdsToBeValidated = "[";
 
 	for(id in CommentsIdsToBeValidated_temp) {CommentsIdsToBeValidated += CommentsIdsToBeValidated_temp[id]+',';}
 	CommentsIdsToBeValidated = CommentsIdsToBeValidated.substring(0,CommentsIdsToBeValidated.length-1)
 	CommentsIdsToBeValidated = CommentsIdsToBeValidated.concat(']');
-	
-	//alert(CommentsIdsToBeValidated);
 	
 	if (confirm("êtes vous sûr de vouloir valider ces commentaires ?")) { 
 		var redirect = "http://localhost/~alexei/FlyWithMeOC2/Web/admin/unvalidatedGroupcomment-validate-" + CommentsIdsToBeValidated + "-" + idArticle.trim()  + ".html"; 
