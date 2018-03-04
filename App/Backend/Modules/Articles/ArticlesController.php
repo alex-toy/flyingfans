@@ -13,7 +13,7 @@ use \OCFram\FormHandler;
 class ArticlesController extends BackController
 {
   
-  public function executeIndex(HTTPRequest $request)
+  public function executeIndex()
   {
     
     $this->page->addVar('title', 'Gestion des articles');

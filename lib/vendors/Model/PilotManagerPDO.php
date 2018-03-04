@@ -96,7 +96,7 @@ class PilotManagerPDO extends PilotManager
   
   
   
-  public function getCountCommentsFromPilots($pilotname)
+  public function getCountCommentsFromPilots()
   {
 
     $AllPilotNames = $this->getAllPilots();

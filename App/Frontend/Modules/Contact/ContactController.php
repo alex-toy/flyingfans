@@ -56,7 +56,7 @@ class ContactController extends BackController
 
   
   
-  public function executeLink(HTTPRequest $request)
+  public function executeLink()
   {
     $this->page->addVar('title', 'liens');
   }

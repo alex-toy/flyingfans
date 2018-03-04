@@ -11,9 +11,8 @@ use \OCFram\FormHandler;
  
 class PilotController extends BackController
 {
-  public function executeIndex(HTTPRequest $request)
+  public function executeIndex()
   {
-    //echo 'PilotController->executeIndex<br>';
     $this->page->addVar('title', 'Gestion des Pilotes');
  
     $pilotmanager = $this->managers->getManagerOf('Pilot');
@@ -21,7 +20,7 @@ class PilotController extends BackController
     $this->page->addVar('listePilotes', $pilotmanager->getAllPilots());
     
     
-    $CountCommentsFromPilotName = $pilotmanager->getCountCommentsFromPilots($pilotname);
+    $CountCommentsFromPilotName = $pilotmanager->getCountCommentsFromPilots();
     $this->page->addVar('CountCommentsFromPilotName', $CountCommentsFromPilotName);
     
     

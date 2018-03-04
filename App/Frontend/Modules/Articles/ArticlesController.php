@@ -15,7 +15,7 @@ use \OCFram\FormHandler;
 class ArticlesController extends BackController
 {
 
-  public function executeListe_articles(HTTPRequest $request)
+  public function executeListe_articles()
   {
     $this->page->addVar('title', 'accueil');
     
@@ -61,7 +61,7 @@ class ArticlesController extends BackController
   
   
   
-  public function executeListe_all_articles(HTTPRequest $request)
+  public function executeListe_all_articles()
   {
     
     $nombreCaracteres = $this->app->config()->get('nombre_caracteres');
@@ -132,8 +132,7 @@ class ArticlesController extends BackController
     $nombreArticles = $manager->count();
     
     $this->page->addVar('nombreArticles', $nombreArticles);
-    
-	$id = $request->getData('id');
+
     
   }
  
@@ -249,7 +248,7 @@ class ArticlesController extends BackController
   }
   
   
-  public function executeWhoamI(HTTPRequest $request)
+  public function executeWhoamI()
   {
 
     $this->page->addVar('title', 'qui je suis?');

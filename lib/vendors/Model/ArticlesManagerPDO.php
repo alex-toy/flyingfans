@@ -198,7 +198,6 @@ class ArticlesManagerPDO extends ArticlesManager
     
     
     // tableau d'id de commentaires:  =======================================
-    $IdCommentArrayArraytemp = [];
     foreach($IdArticleArray as $idArticle){
     	
     	$sql = 'SELECT COUNT(*) FROM comments WHERE id_article = :id_article AND validated = false;';

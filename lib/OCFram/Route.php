@@ -10,7 +10,7 @@ class Route
   protected $varsNames;
   protected $vars = [];
  
-  public function __construct($url, $module, $action, array $varsNames, $comp)
+  public function __construct($url, $module, $action, array $varsNames)
   {
     $this->setUrl($url);
     $this->setModule($module);
